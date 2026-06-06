@@ -1,0 +1,12 @@
+[
+  {
+    "email": "admin@university.edu",
+    "password": "123456",
+    "role": "admin"
+  },
+  {
+    "email": "student@university.edu",
+    "password": "student123",
+    "role": "student"
+  }
+]

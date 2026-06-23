@@ -1,0 +1,259 @@
+/* --- Global Styles & Fonts --- */
+@font-face {
+    font-family: 'Minecraft';
+    src: url('Minecraft.ttf'); /* Ensure this file is inside your static/ folder */
+}
+
+body {
+    margin: 0;
+    font-family: 'Minecraft', Arial, sans-serif;
+    background: #181818; /* Main Dashboard Dark Background */
+    color: #ffffff;
+    image-rendering: pixelated; /* Keeps custom pixel art crisp */
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- Sidebar with Dark Green Aesthetics --- */
+.sidebar {
+    width: 240px;
+    background: #2F5226; /* Sidebar Forest Green background from screenshot */
+    border-right: 6px solid #233414; /* Darker green border */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container .uni-logo {
+    width: 130px;
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar li {
+    color: #bcbcbc;
+    font-size: 20px;
+    padding: 12px 14px;
+    margin: 8px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px; /* Space between the image and the text label */
+    text-shadow: 2px 2px #000;
+    box-sizing: border-box;
+    border: 3px solid transparent; /* Keeps items from jumping when active hover applies */
+}
+
+.sidebar li:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar li.active {
+    background: #233414; /* Active item dark olive block background */
+    border: 3px solid #7CCD56; /* Accurate vibrant green select box border */
+    color: #fff;
+}
+
+/* --- Sharp Pixel-Art Icons for Navigation --- */
+.sidebar-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* --- Main Layout --- */
+.main {
+    flex: 1;
+    padding: 40px;
+    background: #181818; /* Dark UI backdrop */
+    overflow-y: auto;
+}
+
+h1 {
+    font-size: 56px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #7CCD56; /* Vibrant green for primary headers */
+    font-weight: normal;
+}
+
+/* --- Top Header Cards --- */
+.cards {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: #3A5623; /* Metric Card Olive Green Background */
+    border: 5px solid #233414; /* Dark Olive Border */
+    border-radius: 4px; /* Reduced radius for a cleaner blocky look matching the image */
+    box-shadow: inset -4px -4px 0px #1c2a10, inset 4px 4px 0px #537a34; /* Adjusted inner 3D depth to match green theme */
+    width: 250px;
+    height: 155px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 12px 14px 12px;
+    box-sizing: border-box;
+    cursor: default;
+    transition: all 0.15s ease-in-out;
+}
+
+/* --- Glow effect when slot item is hovered --- */
+.card:hover {
+    box-shadow: inset -4px -4px 0px #233414,
+                inset 4px 4px 0px #7CCD56,
+                0px 0px 14px 2px rgba(124, 205, 86, 0.6);
+    transform: translateY(-2px); /* Quick tactile lift animation */
+}
+
+/* --- Center Flex Container for Image Layouts --- */
+.icon-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* --- Sharp Large Inline Asset Sprites --- */
+.grade-icon, .book-icon, .clock-icon, .portal-icon, .creeper-icon {
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.grade-icon { width: 80px; height: 70px; }
+.book-icon { width: 150px; height: 80px; }
+.clock-icon { width: 150px; height: 80px; }
+.portal-icon { width: 130px; height: 100px; }
+.creeper-icon { width: 170px; height: 90px; }
+
+.creeper-centered-icon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card-text {
+    color: #ffffff;
+    font-size: 16px;
+    text-shadow: 2px 2px #000;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+/* --- Achievement Card Split-Column Alignment --- */
+.achievements-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.trophy-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* --- Course Shelves/Panels (Rows) --- */
+.course-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.course-panel {
+    background: #212121; /* Charcoal/Dark Gray box background from image */
+    border: 4px solid #535353; /* Medium gray framing border */
+    border-radius: 0px; /* Square edges layout from screenshot */
+    padding: 20px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: center;
+}
+
+.course-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #ffffff;
+    text-shadow: 2px 2px #000;
+}
+
+.course-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.course-info .code {
+    font-size: 18px;
+}
+
+.course-info .pred {
+    font-size: 16px;
+    color: #aaaaaa;
+}
+
+/* --- Colors & Badges --- */
+.text-green, .badge-green { color: #7CCD56; } /* Updated to Screenshot Green */
+.text-red, .badge-red { color: #ff5555; }
+.text-orange, .badge-orange { color: #ffaa00; }
+
+.badge {
+    border: 2px solid #fff;
+    padding: 1px 4px;
+    background: rgba(0,0,0,0.2);
+}
+
+.text-muted {
+    color: #bcbcbc;
+}
+
+/* --- Minecraft Progress Custom Bars --- */
+.mc-progress-bar {
+    width: 120px;
+    height: 10px;
+    background: #181818;
+    border: 2px solid #535353;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+}
+.green-bar { background: #7CCD56; }
+.red-bar { background: #ff5555; }
+.orange-bar { background: #ffaa00; }
+
+/* --- Fixes for item icons in course rows --- */
+.mc-icon-small {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}

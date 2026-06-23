@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniversityCraft Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+<div class="container">
+
+   <div class="sidebar">
+
+    <div class="logo-container">
+
+    <img
+        src="university-management/img/719482652_996269579791932_2897446188292106300_n.png"
+        alt="Asia University"
+        class="university-logo">
+
+    <h2 class="logo">
+        ASIA UNIVERSITY
+    </h2>
+
+</div>
+
+    <div class="stat-card">
+
+    <div class="stat-header">
+        <img src="https://i.pinimg.com/736x/ed/fc/6d/edfc6d5a5b63db5690f417dee6b776e9.jpg" class="mc-icon">
+        <h3>Dashboard</h3>
+    </div>
+
+    <p>3.8</p>
+
+</div>
+        <div class="stat-header">
+        <img src="https://i.pinimg.com/736x/4e/90/a7/4e90a7c7c8fadc5364e017ac52856db1.jpg" class="mc-icon">
+        <h3>Courses</h3>
+    </div>
+        <div class="stat-header">
+        <img src="https://i.pinimg.com/736x/4e/90/a7/4e90a7c7c8fadc5364e017ac52856db1.jpg" class="mc-icon">
+        <h3>Courses</h3>
+    </div>
+ <div class="stat-header">
+        <img src="https://i.pinimg.com/736x/90/d6/a9/90d6a98fda7d713f8d7c116817d0ee14.jpg" class="mc-icon">
+        <h3>Prediction</h3>
+    </div>
+ <div class="stat-header">
+        <img src="https://i.pinimg.com/736x/4e/90/a7/4e90a7c7c8fadc5364e017ac52856db1.jpg" class="mc-icon">
+        <h3>Achievements</h3>
+    </div>
+
+    </div>
+
+    <div class="main">
+
+        <div class="profile-card">
+
+            <div class="profile-left">
+
+                <img id="avatar"
+                src="https://mc-heads.net/avatar/Steve"
+                class="avatar">
+
+                <div class="profile-info">
+
+                    <h2 id="studentName">Loading...</h2>
+
+                    <p>ID: <span id="studentId"></span></p>
+
+                    <p>Course: <span id="courseName"></span></p>
+
+                </div>
+
+            </div>
+
+            <button
+            class="customize-btn"
+            onclick="openModal()">
+                Customize
+            </button>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <h3>❤ GPA</h3>
+                <p id="gpa">3.8</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>🍗 Attendance</h3>
+                <p id="attendance">92%</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>⛏ Labs</h3>
+                <p id="labs">15</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>💎 Awards</h3>
+                <p id="awards">12</p>
+            </div>
+
+        </div>
+
+        <div class="content-grid">
+
+            <div class="courses">
+
+                <h3 class="section-title">Courses</h3>
+
+                <div class="course-grid" id="courseGrid">
+
+                </div>
+
+            </div>
+
+            <div class="reminders">
+
+                <h3 class="section-title">Reminders</h3>
+
+                <div id="reminderList"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CUSTOMIZE MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <h2>Customize Profile</h2>
+
+        <div class="input-group">
+            <label>Display Name</label>
+            <input type="text" id="newName">
+        </div>
+
+        <div class="input-group">
+            <label>Minecraft Username</label>
+            <input type="text" id="skinName">
+        </div>
+
+        <button class="save-btn" onclick="saveProfile()">
+            Save
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+/*
+====================================
+SIMULATED BACKEND RESPONSE
+Replace with API fetch later
+====================================
+*/
+
+async function loadStudent(){
+
+    const response =
+    await fetch(
+        "http://localhost:5000/api/student/AUS12899"
+    );
+
+    const student =
+    await response.json();
+
+    document.getElementById("studentName")
+    .innerText =
+    student.student_name;
+
+    document.getElementById("studentId")
+    .innerText =
+    student.student_id;
+
+    document.getElementById("courseName")
+    .innerText =
+    student.course_name;
+
+    document.getElementById("avatar")
+    .src =
+    student.avatar;
+}
+
+loadStudent();
+
+const courses = [
+    {
+        code:"ICT1001",
+        name:"Database Systems"
+    },
+    {
+        code:"ICT1002",
+        name:"Web Development"
+    },
+    {
+        code:"ICT1003",
+        name:"Software Engineering"
+    },
+    {
+        code:"ICT1004",
+        name:"Artificial Intelligence"
+    }
+];
+
+const reminders = [
+    "Lab Project",
+    "Database Assignment",
+    "Presentation",
+    "Final Exam"
+];
+
+/*
+====================================
+LOAD PROFILE
+====================================
+*/
+
+document.getElementById("studentName").innerText =
+studentData.student_name;
+
+document.getElementById("studentId").innerText =
+studentData.student_id;
+
+document.getElementById("courseName").innerText =
+studentData.course_name;
+
+/*
+====================================
+LOAD COURSES
+====================================
+*/
+
+const courseGrid =
+document.getElementById("courseGrid");
+
+courses.forEach(course=>{
+
+    courseGrid.innerHTML += `
+        <div class="course-card">
+            <h4>${course.code}</h4>
+            <p>${course.name}</p>
+        </div>
+    `;
+
+});
+
+/*
+====================================
+LOAD REMINDERS
+====================================
+*/
+
+const reminderList =
+document.getElementById("reminderList");
+
+reminders.forEach(item=>{
+
+    reminderList.innerHTML += `
+        <div class="reminder-item">
+            ${item}
+        </div>
+    `;
+
+});
+
+/*
+====================================
+MODAL
+====================================
+*/
+
+function openModal(){
+    document.getElementById("modal").style.display="flex";
+}
+
+window.onclick=function(e){
+
+    if(e.target===document.getElementById("modal")){
+        document.getElementById("modal").style.display="none";
+    }
+
+}
+
+/*
+====================================
+SAVE PROFILE
+====================================
+*/
+
+function saveProfile(){
+
+    const newName =
+    document.getElementById("newName").value;
+
+    const skin =
+    document.getElementById("skinName").value;
+
+    if(newName){
+        document.getElementById("studentName").innerText =
+        newName;
+    }
+
+    if(skin){
+
+        document.getElementById("avatar").src =
+        `https://mc-heads.net/avatar/${skin}`;
+
+    }
+
+    /*
+    BACKEND API
+
+    fetch('/api/profile',{
+      method:'PUT',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+         display_name:newName,
+         minecraft_skin:skin
+      })
+    })
+
+    */
+
+    document.getElementById("modal").style.display="none";
+
+    alert("Profile Updated!");
+
+}
+
+</script>
+
+</body>
+</html>

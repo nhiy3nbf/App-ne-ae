@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniversityCraft Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo-container">
+                <img src="static\image\asia_uni_icon.png" alt="Asia University" class="uni-logo">
+            </div>
+            <ul class="nav-menu">
+                <li class="active">
+                    <a href="/dashboard" class="nav-link">
+                        <img src="static/image/craftingtable.jpg" alt="Dashboard Icon" class="sidebar-icon">
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="/course" class="nav-link">
+                        <img src="static\image\booksheves.jpg" alt="Course Icon" class="sidebar-icon">
+                        Course
+                    </a>
+
+                </li>
+                <li>
+                    <a href="/predict" class="nav-link">
+                        <img src="static\image\luckyblock.jpg" alt="Prediction Icon" class="sidebar-icon">
+                        Prediction
+                    </a>
+                </li>
+                <li>
+                    <a href="/profile" class="nav-link">
+                        <img src="static\image\stevehead.jpg" alt="Profile Icon" class="sidebar-icon">
+                        Profile
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <main class="main">
+
+
+            <section class="profile-card">
+
+                <div class="profile-left">
+
+                    <img id="avatar" src="{{ url_for('static', filename='image/stevehead.jpg') }}" class="avatar">
+
+                    <div class="profile-info">
+
+                        <h2 id="studentName">Loading...</h2>
+
+                        <p>
+                            ID:
+                            <span id="studentId"></span>
+                        </p>
+
+                        <p>
+                            Course:
+                            <span id="courseName"></span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button class="customize-btn" onclick="openModal()">
+                    Customize
+                </button>
+
+            </section>
+
+
+            <section class="stats">
+
+                <div class="stat-card">
+                    <h3>❤ GPA</h3>
+                    <p id="gpa">3.8</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>🍗 Attendance</h3>
+                    <p id="attendance">92%</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>⛏ Labs</h3>
+                    <p id="labs">15</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>💎 Awards</h3>
+                    <p id="awards">12</p>
+                </div>
+
+            </section>
+
+
+            <section class="content-grid">
+
+
+                <div class="courses">
+
+                    <h3 class="section-title">
+                        Courses
+                    </h3>
+
+                    <div class="course-grid" id="courseGrid">
+                    </div>
+
+                </div>
+
+
+                <div class="reminders">
+
+                    <h3 class="section-title">
+                        Reminders
+                    </h3>
+
+                    <div id="reminderList"></div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <div class="modal" id="modal">
+
+        <div class="modal-content">
+
+            <h2>Customize Profile</h2>
+
+            <div class="input-group">
+
+                <label>
+                    Display Name
+                </label>
+
+                <input type="text" id="newName">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    Minecraft Username
+                </label>
+
+                <input type="text" id="skinName">
+
+            </div>
+
+            <button class="save-btn" onclick="saveProfile()">
+
+                Save
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        async function loadStudent() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/student/AUS12899"
+                    );
+
+                const student =
+                    await response.json();
+
+                document.getElementById("studentName").innerText =
+                    student.student_name;
+
+                document.getElementById("studentId").innerText =
+                    student.student_id;
+
+                document.getElementById("courseName").innerText =
+                    student.course_name;
+
+                if (student.avatar) {
+                    document.getElementById("avatar").src =
+                        student.avatar;
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                document.getElementById("studentName").innerText =
+                    "Failed To Load";
+
+            }
+
+        }
+
+        loadStudent();
+
+        const courses = [
+            {
+                code: "ICT1001",
+                name: "Database Systems"
+            },
+            {
+                code: "ICT1002",
+                name: "Web Development"
+            },
+            {
+                code: "ICT1003",
+                name: "Software Engineering"
+            },
+            {
+                code: "ICT1004",
+                name: "Artificial Intelligence"
+            }
+        ];
+
+        const reminders = [
+            "Lab Project",
+            "Database Assignment",
+            "Presentation",
+            "Final Exam"
+        ];
+
+        const courseGrid =
+            document.getElementById("courseGrid");
+
+        courses.forEach(course => {
+
+            courseGrid.innerHTML += `
+        <div class="course-card">
+            <h4>${course.code}</h4>
+            <p>${course.name}</p>
+        </div>
+    `;
+
+        });
+
+        const reminderList =
+            document.getElementById("reminderList");
+
+        reminders.forEach(item => {
+
+            reminderList.innerHTML += `
+        <div class="reminder-item">
+            ${item}
+        </div>
+    `;
+
+        });
+
+        function openModal() {
+
+            document.getElementById("modal").style.display =
+                "flex";
+
+        }
+
+        window.onclick = function (e) {
+
+            if (
+                e.target ===
+                document.getElementById("modal")
+            ) {
+
+                document.getElementById("modal").style.display =
+                    "none";
+
+            }
+
+        }
+
+        function saveProfile() {
+
+            const newName =
+                document.getElementById("newName").value;
+
+            const skin =
+                document.getElementById("skinName").value;
+
+            if (newName) {
+
+                document.getElementById("studentName").innerText =
+                    newName;
+
+            }
+
+            if (skin) {
+
+                document.getElementById("avatar").src =
+                    `https://mc-heads.net/avatar/${skin}`;
+
+            }
+
+            document.getElementById("modal").style.display =
+                "none";
+
+            alert("Profile Updated!");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

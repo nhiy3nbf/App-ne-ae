@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}App{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Minecraft', Arial, sans-serif;
+            background: #181818;
+            /* Main Dashboard Dark Background */
+            color: #ffffff;
+            image-rendering: pixelated;
+            /* Keeps custom pixel art crisp */
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* --- Sidebar with Dark Green Aesthetics --- */
+        .sidebar {
+            width: 240px;
+            background: #2F5226;
+            /* Sidebar Forest Green background from screenshot */
+            border-right: 6px solid #233414;
+            /* Darker green border */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-container .uni-logo {
+            width: 130px;
+            height: auto;
+            margin-bottom: 40px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .sidebar li {
+            color: #bcbcbc;
+            font-size: 20px;
+            padding: 12px 14px;
+            margin: 8px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            /* Space between the image and the text label */
+            text-shadow: 2px 2px #000;
+            box-sizing: border-box;
+            border: 3px solid transparent;
+            /* Keeps items from jumping when active hover applies */
+        }
+
+        .sidebar li:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar li.active {
+            background: #233414;
+            /* Active item dark olive block background */
+            border: 3px solid #7CCD56;
+            /* Accurate vibrant green select box border */
+            color: #fff;
+        }
+
+        /* --- Sharp Pixel-Art Icons for Navigation --- */
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo-container">
+                <img src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.15752-9/719482652_996269579791932_2897446188292106300_n.png?_nc_cat=101&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeH3IqAyWnA-SQcOpAdvLP3Vcuyl3sDbI0xy7KXewNsjTJ2oTSg5oqxaAO9rvLH51AdnqvFHiHvq41TAo0xKQv-C&_nc_ohc=vQczFj7uSnkQ7kNvwFp0CgT&_nc_oc=AdrH3fm7SrrOoZjaxXk9tDuQ4zdhxrAKp7PxeE4fBvl8FV5zIb13-WY2h74SpT0XAxs&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fsgn2-4.fna&_nc_ss=7a22e&oh=03_Q7cD5gEDvKmxBB1lTyjdMCD6cP9WcO-O47zpALLSvjgTVd7MDg&oe=6A505C41"
+                    alt="Asia University" class="uni-logo">
+            </div>
+            <ul class="nav-menu">
+                <li>
+                    <img src="https://i.pinimg.com/736x/ed/fc/6d/edfc6d5a5b63db5690f417dee6b776e9.jpg"
+                        alt="Dashboard Icon" class="sidebar-icon">
+                    Dashboard
+                </li>
+                <li>
+                    <img src="https://i.pinimg.com/736x/4e/90/a7/4e90a7c7c8fadc5364e017ac52856db1.jpg" alt="Course Icon"
+                        class="sidebar-icon">
+                    Course
+                </li>
+                <li class="active">
+                    <img src="https://i.pinimg.com/736x/59/b2/3c/59b23cbe9837b1674f52863650a9d82a.jpg"
+                        alt="Prediction Icon" class="sidebar-icon">
+                    Prediction
+                </li>
+                <li>
+                    <img src="https://i.pinimg.com/736x/90/d6/a9/90d6a98fda7d713f8d7c116817d0ee14.jpg"
+                        alt="Profile Icon" class="sidebar-icon">
+                    Profile
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

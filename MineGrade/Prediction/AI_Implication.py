@@ -62,7 +62,7 @@ def get_giga_steve_response(user_text, chat_history=None):
             config=types.GenerateContentConfig(
                 system_instruction=GIGA_STEVE_SYSTEM_INSTRUCTION,
                 temperature=0.7,
-                max_output_tokens=450,
+                max_output_tokens=600,
             )
         )
         return response.text.strip()

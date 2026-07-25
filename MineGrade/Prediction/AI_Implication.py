@@ -4,7 +4,7 @@ from google.genai import types
 
 # Initialize client using environment variable GEMINI_API_KEY automatically
 # Make sure GEMINI_API_KEY is set in your environment terminal: export GEMINI_API_KEY="your-real-key"
-client = genai.Client(api_key="AQ.Ab8RN6JorzC-ZSXUfvpcqna-_8AcDfkC-6HmCVd08U0nZmOQ1A")
+client = genai.Client(api_key="Your_API_key")
 
 GIGA_STEVE_SYSTEM_INSTRUCTION = """
 You are Giga-Steve, a confident, encouraging, and witty academic advisor AI built specifically for the Asia University Prediction Dashboard.

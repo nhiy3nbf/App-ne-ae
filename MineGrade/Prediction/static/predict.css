@@ -782,6 +782,12 @@ h1 {
     border: 2px solid #333;
     padding: 15px 20px;
     margin-bottom: 12px;
+    transition: border-color 0.2s ease;
+}
+
+.semester-header-panel:hover {
+    border-color: #55ff55;
+    cursor: pointer;
 }
 
 .semester-title-row {
@@ -1298,6 +1304,13 @@ details.semester-section[open] .chevron {
 /* TRIGGER: Play letter animation ONLY when semester box is opened */
 .semester-checkbox:checked ~ .course-container .animated-grade-text::after {
     animation-play-state: running !important;
+}
+
+/* Add hover border effect for the Semester Box */
+.semester-summary-btn:hover .semester-header-panel,
+.semester-header-panel:hover {
+    border-color: #55ff55; /* Minecraft green hover border */
+    cursor: pointer;
 }
 
 .chat-message.user-message {

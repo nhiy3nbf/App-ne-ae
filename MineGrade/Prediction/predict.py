@@ -10,17 +10,19 @@ DEFAULT_GREETING = [
 ]
 
 def update_assignment_statuses(semesters):
-    """Automatically updates 'status' to completed/pending based on score string."""
+    """Automatically updates 'status' to completed/pending based on valid score."""
     for semester in semesters:
         for course in semester.get("courses", []):
             for assign in course.get("assignments", []):
                 score = str(assign.get("score", "")).strip()
                 
-                # Check if score is missing, empty, or placeholder like "--/100" or N/A
-                if not score or score.startswith("--") or score.upper() == "N/A":
-                    assign["status"] = "pending"
-                else:
+                # Check if the score starts with a valid number before /100
+                score_match = re.match(r"^(\d+(\.\d+)?)\s*/\s*100$", score)
+                
+                if score_match:
                     assign["status"] = "completed"
+                else:
+                    assign["status"] = "pending"
                     
     return semesters
 
@@ -330,8 +332,8 @@ def predict():
                     "assignments": [
                         {"title": "Attendance", "score": "--/100", "weight": "10%"},
                         {"title": "Project Phase 1", "score": "70/100", "weight": "25%"},
-                        {"title": "Project Phase 2", "score": "--/100", "weight": "25%"},
-                        {"title": "Final Presentation", "score": "--/100", "weight": "40%"}
+                        {"title": "Project Phase 2", "score": "No assignment", "weight": "25%"},
+                        {"title": "Final Presentation", "score": "/100", "weight": "40%"}
                     ]
                 }
             ]

@@ -9,6 +9,20 @@ DEFAULT_GREETING = [
     {"sender": "bot", "text": "Greetings, scholar. I am Giga-Steve. Need help improving your grades or understanding your subject predictions?"}
 ]
 
+def update_assignment_statuses(semesters):
+    """Automatically updates 'status' to completed/pending based on score string."""
+    for semester in semesters:
+        for course in semester.get("courses", []):
+            for assign in course.get("assignments", []):
+                score = str(assign.get("score", "")).strip()
+                
+                # Check if score is missing, empty, or placeholder like "--/100" or N/A
+                if not score or score.startswith("--") or score.upper() == "N/A":
+                    assign["status"] = "pending"
+                else:
+                    assign["status"] = "completed"
+                    
+    return semesters
 
 def get_asia_uni_grade_info(mark):
     if mark >= 90:
@@ -208,55 +222,55 @@ def predict():
                 {
                     "code": "Course 1",
                     "assignments": [
-                        {"title": "Attendance", "score": "95/100", "weight": "10%", "status": "completed"},
-                        {"title": "Assignment 1", "score": "30/100", "weight": "25%", "status": "completed"},
-                        {"title": "Midterm Exam", "score": "25/100", "weight": "30%", "status": "completed"},
-                        {"title": "Final Project", "score": "35/100", "weight": "35%", "status": "completed"}
+                        {"title": "Attendance", "score": "95/100", "weight": "10%"},
+                        {"title": "Assignment 1", "score": "30/100", "weight": "25%"},
+                        {"title": "Midterm Exam", "score": "25/100", "weight": "30%"},
+                        {"title": "Final Project", "score": "35/100", "weight": "35%"}
                     ]
                 },
                 {
                     "code": "Course 2",
                     "assignments": [
-                        {"title": "Attendance", "score": "100/100", "weight": "10%", "status": "completed"},
-                        {"title": "Quiz 1", "score": "20/100", "weight": "20%", "status": "completed"},
-                        {"title": "Midterm Exam", "score": "35/100", "weight": "35%", "status": "completed"},
-                        {"title": "Final Exam", "score": "30/100", "weight": "35%", "status": "completed"}
+                        {"title": "Attendance", "score": "100/100", "weight": "10%"},
+                        {"title": "Quiz 1", "score": "20/100", "weight": "20%"},
+                        {"title": "Midterm Exam", "score": "35/100", "weight": "35%"},
+                        {"title": "Final Exam", "score": "30/100", "weight": "35%"}
                     ]
                 },
                 {
                     "code": "Course 3",
                     "assignments": [
-                        {"title": "Attendance", "score": "90/100", "weight": "10%", "status": "completed"},
-                        {"title": "Lab 1", "score": "40/100", "weight": "25%", "status": "completed"},
-                        {"title": "Lab 2", "score": "20/100", "weight": "25%", "status": "completed"},
-                        {"title": "Final Paper", "score": "30/100", "weight": "40%", "status": "completed"}
+                        {"title": "Attendance", "score": "90/100", "weight": "10%"},
+                        {"title": "Lab 1", "score": "40/100", "weight": "25%"},
+                        {"title": "Lab 2", "score": "20/100", "weight": "25%"},
+                        {"title": "Final Paper", "score": "30/100", "weight": "40%"}
                     ]
                 },
                 {
                     "code": "Course 4",
                     "assignments": [
-                        {"title": "Attendance", "score": "100/100", "weight": "10%", "status": "completed"},
-                        {"title": "Quiz 1", "score": "85/100", "weight": "20%", "status": "completed"},
-                        {"title": "Midterm Exam", "score": "78/100", "weight": "35%", "status": "completed"},
-                        {"title": "Final Project", "score": "80/100", "weight": "35%", "status": "completed"}
+                        {"title": "Attendance", "score": "100/100", "weight": "10%"},
+                        {"title": "Quiz 1", "score": "85/100", "weight": "20%"},
+                        {"title": "Midterm Exam", "score": "78/100", "weight": "35%"},
+                        {"title": "Final Project", "score": "80/100", "weight": "35%"}
                     ]
                 },
                 {
                     "code": "Course 5",
                     "assignments": [
-                        {"title": "Attendance", "score": "95/100", "weight": "10%", "status": "completed"},
-                        {"title": "Assignment 1", "score": "75/100", "weight": "25%", "status": "completed"},
-                        {"title": "Assignment 2", "score": "68/100", "weight": "25%", "status": "completed"},
-                        {"title": "Final Exam", "score": "70/100", "weight": "40%", "status": "completed"}
+                        {"title": "Attendance", "score": "95/100", "weight": "10%"},
+                        {"title": "Assignment 1", "score": "75/100", "weight": "25%"},
+                        {"title": "Assignment 2", "score": "68/100", "weight": "25%"},
+                        {"title": "Final Exam", "score": "70/100", "weight": "40%"}
                     ]
                 },
                 {
                     "code": "Course 6",
                     "assignments": [
-                        {"title": "Attendance", "score": "100/100", "weight": "10%", "status": "completed"},
-                        {"title": "Project Phase 1", "score": "80/100", "weight": "25%", "status": "completed"},
-                        {"title": "Project Phase 2", "score": "75/100", "weight": "25%", "status": "completed"},
-                        {"title": "Final Presentation", "score": "80/100", "weight": "40%", "status": "completed"}
+                        {"title": "Attendance", "score": "100/100", "weight": "10%"},
+                        {"title": "Project Phase 1", "score": "80/100", "weight": "25%"},
+                        {"title": "Project Phase 2", "score": "75/100", "weight": "25%"},
+                        {"title": "Final Presentation", "score": "80/100", "weight": "40%"}
                     ]
                 }
             ]
@@ -269,60 +283,63 @@ def predict():
                 {
                     "code": "Course 1",
                     "assignments": [
-                        {"title": "Attendance", "score": "--/100", "weight": "10%", "status": "pending"},
-                        {"title": "Assignment 1", "score": "10/100", "weight": "25%", "status": "completed"},
-                        {"title": "Midterm Exam", "score": "10/100", "weight": "35%", "status": "completed"},
-                        {"title": "Final Project", "score": "--/100", "weight": "30%", "status": "pending"}
+                        {"title": "Attendance", "score": "100/100", "weight": "10%"},
+                        {"title": "Assignment 1", "score": "10/100", "weight": "25%"},
+                        {"title": "Midterm Exam", "score": "10/100", "weight": "35%"},
+                        {"title": "Final Project", "score": "100/100", "weight": "30%"}
                     ]
                 },
                 {
                     "code": "Course 2",
                     "assignments": [
-                        {"title": "Attendance", "score": "--/100", "weight": "10%", "status": "pending"},
-                        {"title": "Quiz 1", "score": "95/100", "weight": "20%", "status": "completed"},
-                        {"title": "Midterm Exam", "score": "88/100", "weight": "35%", "status": "completed"},
-                        {"title": "Final Exam", "score": "--/100", "weight": "35%", "status": "pending"}
+                        {"title": "Attendance", "score": "100/100", "weight": "10%"},
+                        {"title": "Quiz 1", "score": "95/100", "weight": "20%"},
+                        {"title": "Midterm Exam", "score": "88/100", "weight": "35%"},
+                        {"title": "Final Exam", "score": "--/100", "weight": "35%"}
                     ]
                 },
                 {
                     "code": "Course 3",
                     "assignments": [
-                        {"title": "Attendance", "score": "--/100", "weight": "10%", "status": "pending"},
-                        {"title": "Lab 1", "score": "92/100", "weight": "25%", "status": "completed"},
-                        {"title": "Lab 2", "score": "--/100", "weight": "25%", "status": "pending"},
-                        {"title": "Final Paper", "score": "--/100", "weight": "40%", "status": "pending"}
+                        {"title": "Attendance", "score": "--/100", "weight": "10%"},
+                        {"title": "Lab 1", "score": "92/100", "weight": "25%"},
+                        {"title": "Lab 2", "score": "--/100", "weight": "25%"},
+                        {"title": "Final Paper", "score": "--/100", "weight": "40%"}
                     ]
                 },
                 {
                     "code": "Course 4",
                     "assignments": [
-                        {"title": "Attendance", "score": "--/100", "weight": "10%", "status": "pending"},
-                        {"title": "Quiz 1", "score": "90/100", "weight": "20%", "status": "completed"},
-                        {"title": "Midterm Exam", "score": "91/100", "weight": "35%", "status": "completed"},
-                        {"title": "Final Project", "score": "--/100", "weight": "35%", "status": "pending"}
+                        {"title": "Attendance", "score": "--/100", "weight": "10%"},
+                        {"title": "Quiz 1", "score": "90/100", "weight": "20%"},
+                        {"title": "Midterm Exam", "score": "91/100", "weight": "35%"},
+                        {"title": "Final Project", "score": "--/100", "weight": "35%"}
                     ]
                 },
                 {
                     "code": "Course 5",
                     "assignments": [
-                        {"title": "Attendance", "score": "--/100", "weight": "10%", "status": "pending"},
-                        {"title": "Assignment 1", "score": "98/100", "weight": "25%", "status": "completed"},
-                        {"title": "Assignment 2", "score": "96/100", "weight": "25%", "status": "completed"},
-                        {"title": "Final Exam", "score": "--/100", "weight": "40%", "status": "pending"}
+                        {"title": "Attendance", "score": "--/100", "weight": "10%"},
+                        {"title": "Assignment 1", "score": "98/100", "weight": "25%"},
+                        {"title": "Assignment 2", "score": "96/100", "weight": "25%"},
+                        {"title": "Final Exam", "score": "--/100", "weight": "40%"}
                     ]
                 },
                 {
                     "code": "Course 6",
                     "assignments": [
-                        {"title": "Attendance", "score": "--/100", "weight": "10%", "status": "pending"},
-                        {"title": "Project Phase 1", "score": "70/100", "weight": "25%", "status": "completed"},
-                        {"title": "Project Phase 2", "score": "--/100", "weight": "25%", "status": "pending"},
-                        {"title": "Final Presentation", "score": "--/100", "weight": "40%", "status": "pending"}
+                        {"title": "Attendance", "score": "--/100", "weight": "10%"},
+                        {"title": "Project Phase 1", "score": "70/100", "weight": "25%"},
+                        {"title": "Project Phase 2", "score": "--/100", "weight": "25%"},
+                        {"title": "Final Presentation", "score": "--/100", "weight": "40%"}
                     ]
                 }
             ]
         }
     ]
+
+    # --- AUTO-UPDATE ASSIGNMENT STATUSES ---
+    raw_semesters = update_assignment_statuses(raw_semesters)
 
     total_points = 0.0
     total_percent_sum = 0.0

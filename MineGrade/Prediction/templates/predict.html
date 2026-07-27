@@ -85,15 +85,25 @@
                                 <h2>{{ sem.title }}</h2>
                             </div>
                             <div class="semester-meta">
-                                <span>{{ sem.units }} units</span>
-                                <span class="completion-badge {{ sem.status }}">
-                                    {% if sem.status == 'completed' %}
-                                        100% complete
-                                    {% else %}
-                                        {{ sem.progress_percent }}% in progress
-                                    {% endif %}
-                                </span>
-                            </div>
+    <span>{{ sem.units }} units</span>
+    <!-- Jinja conditional inline check for the text color -->
+    <span class="completion-badge 
+        {% if sem.progress_percent >= 100 %}
+            text-green
+        {% elif sem.progress_percent >= 50 %}
+            text-yellow-green
+        {% elif sem.progress_percent > 0 %}
+            text-orange
+        {% else %}
+            text-red
+        {% endif %}">
+        {% if sem.status == 'completed' %}
+            100% complete
+        {% else %}
+            {{ sem.progress_percent }}% in progress
+        {% endif %}
+    </span>
+</div>
                         </div>
                         
                         <div class="semester-term">{{ sem.term }}</div>
@@ -102,7 +112,7 @@
                         <div class="semester-progress-container">
                             <div class="semester-bar-label">
                                 <span>Semester Progress</span>
-                                <span>{{ sem.progress_percent }}%</span>
+                                <!-- Removed redundant percentage span -->
                             </div>
                             <div class="mc-progress-bar">
                                 <div class="progress 
@@ -213,7 +223,7 @@
                             <span>Giga Steve AI Assistant</span>
                         </div>
                         <div class="chat-actions" style="display: flex; gap: 8px; align-items: center;">
-                            <!-- Pure HTML Reset Form (Submits to hidden frame to reset history) -->
+                            <!-- Pure HTML Reset Form -->
                             <form action="/send_message" method="POST" target="chat_iframe" style="display:inline;">
                                 <input type="hidden" name="action" value="reset">
                                 <button type="submit" class="reset-btn" title="Reset Chat">
@@ -224,7 +234,7 @@
                         </div>
                     </div>
                     
-                    <!-- Embedded Pure-HTML Chat Frame (Reloads internally on submit) -->
+                    <!-- Embedded Pure-HTML Chat Frame -->
                     <iframe name="chat_iframe" id="chat_iframe" src="/embed_chat" style="width: 100%; height: 100%; border: none;"></iframe>
                 </div>
 

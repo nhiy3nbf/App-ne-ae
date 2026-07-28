@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>MineGrade - {{ student.fullname }}</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='admin.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="admin-container">
+      <a class="back-link" href="{{ url_for('admin.dashboard') }}">
+        ← Back to Student List
+      </a>
+
+      <h1 class="page-title">{{ student.fullname or "Unnamed Student" }}</h1>
+
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="flash-box">
+        {% for msg in messages %}
+
+        <p>{{ msg }}</p>
+
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+
+      <!-- STUDENT INFORMATION -->
+
+      <section class="admin-card">
+        <h2>Student Information</h2>
+
+        <form
+          method="POST"
+          action="{{ url_for('admin.update_info', student_id=student.id) }}"
+        >
+          <div class="form-row">
+            <div class="form-field">
+              <label>Full Name</label>
+
+              <input
+                type="text"
+                name="fullname"
+                value="{{ student.fullname or '' }}"
+              />
+            </div>
+
+            <div class="form-field">
+              <label>Student ID</label>
+
+              <input
+                type="text"
+                name="student_id"
+                value="{{ student.student_id or '' }}"
+              />
+            </div>
+
+            <div class="form-field">
+              <label>Gender</label>
+
+              <input
+                type="text"
+                name="gender"
+                value="{{ student.gender or '' }}"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label>Date of Birth</label>
+
+              <input
+                type="date"
+                name="date_of_birth"
+                value="{{ student.date_of_birth or '' }}"
+              />
+            </div>
+
+            <div class="form-field">
+              <label>Major</label>
+
+              <input
+                type="text"
+                name="major"
+                value="{{ student.major or '' }}"
+              />
+            </div>
+
+            <div class="form-field">
+              <label>Class</label>
+
+              <input
+                type="text"
+                name="class"
+                value="{{ student.class or '' }}"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label>Enrollment Year</label>
+
+              <input
+                type="number"
+                name="enrollment_year"
+                value="{{ student.enrollment_year or '' }}"
+              />
+            </div>
+
+            <div class="form-field">
+              <label>National ID</label>
+
+              <input
+                type="text"
+                name="national_id"
+                value="{{ student.national_id or '' }}"
+              />
+            </div>
+
+            <div class="form-field">
+              <label>Nationality</label>
+
+              <input
+                type="text"
+                name="nationality"
+                value="{{ student.nationality or '' }}"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label>Email</label>
+
+              <input type="email" value="{{ student.email }}" disabled />
+            </div>
+
+            <div class="form-field">
+              <label>Phone Number</label>
+
+              <input
+                type="text"
+                name="phone_number"
+                value="{{ student.phone_number or '' }}"
+              />
+            </div>
+
+            <div class="form-field">
+              <label>Address</label>
+
+              <input
+                type="text"
+                name="address"
+                value="{{ student.address or '' }}"
+              />
+            </div>
+          </div>
+
+          <button class="save-btn" type="submit">Save Information</button>
+        </form>
+      </section>
+      <!-- ================= COURSES & GRADES ================= -->
+
+      <section class="admin-card">
+        <h2>Courses & Grades</h2>
+
+        <form
+          method="POST"
+          action="{{ url_for('admin.save_grades', student_id=student.id) }}"
+        >
+          <div class="grades-table-wrap">
+            <table class="admin-table grades-table">
+              <thead>
+                <tr>
+                  <th>Course</th>
+
+                  <th>Semester</th>
+
+                  <th>Attendance</th>
+
+                  <th>Assignment</th>
+
+                  <th>Quiz</th>
+
+                  <th>Midterm</th>
+
+                  <th>Final</th>
+
+                  <th>Total</th>
+
+                  <th>Grade</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for e in enrollments %}
+
+                <tr>
+                  <td>
+                    {{ e.course_code }}
+
+                    <br />
+
+                    <span class="course-name-sub"> {{ e.course_name }} </span>
+
+                    <input
+                      type="hidden"
+                      name="enrollment_id"
+                      value="{{ e.enrollment_id }}"
+                    />
+                  </td>
+
+                  <td>S{{ e.semester_number }} - {{ e.academic_year }}</td>
+
+                  <td>
+                    <input
+                      class="grade-input"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="0.1"
+                      name="attendance_{{ e.enrollment_id }}"
+                      value="{{ e.attendance if e.attendance is not none else '' }}"
+                    />
+                  </td>
+
+                  <td>
+                    <input
+                      class="grade-input"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="0.1"
+                      name="assignment_{{ e.enrollment_id }}"
+                      value="{{ e.assignment if e.assignment is not none else '' }}"
+                    />
+                  </td>
+
+                  <td>
+                    <input
+                      class="grade-input"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="0.1"
+                      name="quiz_{{ e.enrollment_id }}"
+                      value="{{ e.quiz if e.quiz is not none else '' }}"
+                    />
+                  </td>
+
+                  <td>
+                    <input
+                      class="grade-input"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="0.1"
+                      name="midterm_exam_{{ e.enrollment_id }}"
+                      value="{{ e.midterm_exam if e.midterm_exam is not none else '' }}"
+                    />
+                  </td>
+
+                  <td>
+                    <input
+                      class="grade-input"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="0.1"
+                      name="final_exam_{{ e.enrollment_id }}"
+                      value="{{ e.final_exam if e.final_exam is not none else '' }}"
+                    />
+                  </td>
+
+                  <td class="readonly-cell">
+                    {{ e.total_score if e.total_score is not none else "-" }}
+                  </td>
+
+                  <td class="readonly-cell">{{ e.letter_grade or "-" }}</td>
+                </tr>
+
+                {% else %}
+
+                <tr>
+                  <td colspan="9">No enrolled courses.</td>
+                </tr>
+
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          {% if enrollments %}
+
+          <button class="save-btn" type="submit">Save Grades</button>
+
+          {% endif %}
+        </form>
+      </section>
+
+      <!-- ================= ENROLL NEW COURSE ================= -->
+
+      <section class="admin-card">
+        <h2>Enroll New Course</h2>
+
+        {% if available_courses %}
+
+        <form
+          class="enroll-form"
+          method="POST"
+          action="{{ url_for('admin.enroll', student_id=student.id) }}"
+        >
+          <div class="form-field">
+            <label> Course </label>
+
+            <select name="course_id" required>
+              {% for c in available_courses %}
+
+              <option value="{{ c.id }}">
+                {{ c.course_code }} - {{ c.course_name }} (Semester {{
+                c.semester_number }} - {{ c.academic_year }})
+              </option>
+
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label> Enrollment Month </label>
+
+            <input
+              type="number"
+              min="1"
+              max="12"
+              name="enrollment_month"
+              placeholder="1 - 12"
+            />
+          </div>
+
+          <div class="form-field">
+            <label> Status </label>
+
+            <select name="status">
+              <option value="enrolled">Enrolled</option>
+
+              <option value="completed">Completed</option>
+
+              <option value="dropped">Dropped</option>
+            </select>
+          </div>
+
+          <button class="save-btn" type="submit">Enroll</button>
+        </form>
+
+        {% else %}
+
+        <p class="empty-msg">
+          Student has already enrolled in all available courses.
+        </p>
+
+        {% endif %}
+      </section>
+    </div>
+  </body>
+</html>

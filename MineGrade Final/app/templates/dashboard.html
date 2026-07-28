@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Minegrade - Dashboard{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/dashboard.css') }}">
+{% endblock %}
+
+{% block main %}
+<main class="main">
+{% if student %}
+    <section class="profile-card">
+        <div class="profile-left">
+            <img id="avatar"
+                 src="{{ student.avatar or url_for('static', filename='image/stevehead.jpg') }}"
+                 class="avatar" />
+
+            <div class="profile-info">
+                <h2>{{ student.fullname or "Unknown" }}</h2>
+                <p>ID: <span>{{ student.student_id or "-" }}</span></p>
+                <p>Major: <span>{{ student.major or "-" }}</span></p>
+            </div>
+        </div>
+
+        <a href="#customize-modal" class="customize-btn">Customize</a>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h3>❤ GPA</h3>
+            <p>{{ stats.gpa }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>🍗 Attendance</h3>
+            <p>{{ stats.attendance }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>⛏ Labs</h3>
+            <p>{{ stats.labs }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>💎 Awards</h3>
+            <p>{{ stats.awards }}</p>
+        </div>
+    </section>
+
+    <section class="content-grid">
+        <div class="courses">
+            <h3 class="section-title">Courses</h3>
+
+            <div class="course-grid">
+                {% for course in courses %}
+                <div class="course-card">
+                    <h4>{{ course.code }}</h4>
+                    <p>{{ course.name }}</p>
+                </div>
+                {% else %}
+                <p class="empty-msg">No courses enrolled yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="reminders">
+            <h3 class="section-title">Predictions</h3>
+            <p class="overall-pred-line">Overall: <span class="pred-grade text-{{ overall_prediction_color }}">{{ overall_prediction }}</span></p>
+
+            {% for item in predictions %}
+            <div class="reminder-item prediction-item">
+                <span>{{ item.code }}</span>
+                <span class="pred-grade text-{{ item.color }}">{{ item.prediction }}</span>
+            </div>
+            {% else %}
+            <p class="empty-msg">No prediction data yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+{% else %}
+    <div class="error-box">
+        <p>{{ error or "Student record not found." }}</p>
+    </div>
+{% endif %}
+</main>
+
+<div class="modal" id="customize-modal">
+    <div class="modal-content">
+        <h2>Customize Profile</h2>
+
+        <form method="POST" action="{{ url_for('dashboard.update_profile') }}">
+            <div class="input-group">
+                <label>Display Name</label>
+                <input type="text" name="newName" placeholder="{{ student.fullname if student else '' }}">
+            </div>
+
+            <div class="input-group">
+                <label>Minecraft Username</label>
+                <input type="text" name="skinName">
+            </div>
+
+            <button type="submit" class="save-btn">Save</button>
+        </form>
+
+        <a href="#" class="modal-close">✕</a>
+    </div>
+</div>
+{% endblock %}

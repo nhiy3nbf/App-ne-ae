@@ -1,0 +1,253 @@
+/* ========================================================================== */
+/* 4. PROFILE CARD */
+/* ========================================================================== */
+
+.profile-card {
+    background: #2d2d2d;
+    border: 4px solid #777;
+    padding: 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.profile-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border: 4px solid white;
+    object-fit: cover;
+}
+
+.profile-info h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.profile-info p {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.customize-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* ========================================================================== */
+/* 5. STATS */
+/* ========================================================================== */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: #4c7a35;
+    border: 4px solid #2a411e;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.stat-card p {
+    font-size: 20px;
+}
+
+/* ========================================================================== */
+/* 6. CONTENT */
+/* ========================================================================== */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.courses,
+.reminders {
+    background: #2d2d2d;
+    border: 4px solid #777;
+    padding: 20px;
+}
+
+.section-title {
+    color: #ffe600;
+    margin-bottom: 20px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.course-card {
+    background: #4c7a35;
+    border: 3px solid #2a411e;
+    padding: 15px;
+}
+
+.course-card h4 {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.reminder-item {
+    background: #795548;
+    border: 2px solid #4e342e;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+/* ========================================================================== */
+/* 7. MODAL */
+/* ========================================================================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.modal:target {
+    display: flex;
+}
+
+.modal-content {
+    background: #2d2d2d;
+    border: 5px solid #777;
+
+    width: 500px;
+    padding: 30px;
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 12px;
+    background: #4CAF50;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.modal-close:hover {
+    color: white;
+}
+
+/* ========================================================================== */
+/* 8. RESPONSIVE */
+/* ========================================================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================================================== */
+/* 9. PREDICTIONS PANEL */
+/* ========================================================================== */
+
+.prediction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.overall-pred-line {
+    font-size: 12px;
+    color: #cccccc;
+    margin-bottom: 12px;
+}
+
+.pred-grade {
+    font-weight: bold;
+}
+
+.text-green { color: #55ff55; }
+.text-yellow-green { color: #aaff00; }
+.text-yellow { color: #ffff55; }
+.text-orange { color: #ffaa00; }
+.text-red { color: #ff5555; }
+.text-gray { color: #999999; }
+
+.empty-msg {
+    color: #999999;
+    font-size: 12px;
+}
+
+.error-box {
+    padding: 20px;
+    color: #ff5555;
+}

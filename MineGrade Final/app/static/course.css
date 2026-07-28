@@ -1,0 +1,726 @@
+.main-content {
+    flex: 1;
+    background-color: var(--bg-content);
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.page-title {
+    color: var(--text-green);
+    font-size: 32px;
+    margin-bottom: 35px;
+    text-shadow: 3px 3px #000;
+    font-weight: normal;
+}
+
+/* Stat Header Row Grid Configuration */
+.top-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 45px;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 3px solid #54843f;
+    border-bottom-color: #243d17;
+    border-right-color: #243d17;
+    padding: 24px 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    box-shadow: inset -3px -3px 0px var(--mc-shadow);
+}
+
+.card-icon {
+    font-size: 36px;
+    margin-bottom: 15px;
+    height: 65px;
+    width: 65px;
+}
+
+.card-icon-end-portal {
+    font-size: 36px;
+    margin-bottom: 15px;
+    height: 80px;
+    width: 120px;
+}
+
+.card-title {
+    font-size: 13px;
+    text-shadow: 2px 2px #000;
+}
+
+.grade-box {
+    border: 2px solid var(--text-white);
+    padding: 0 5px;
+    color: #ffaa00;
+    margin-left: 4px;
+    display: inline-block;
+}
+
+/* Subject Display Rows Layout */
+.subject-row {
+    background-color: #171717;
+    border: 2px solid var(--border-gray);
+    padding: 24px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.subject-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.subject-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 13px;
+    text-shadow: 1px 1px #000;
+}
+
+.pred-text {
+    color: #aaaaaa;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 16px;
+    background-color: #111111;
+    border: 2px solid #222222;
+    box-shadow: inset 1px 1px 2px #000000;
+    padding: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    box-shadow: inset 0px 2px 0px rgba(255, 255, 255, 0.25);
+    transition: width 0.8s cubic-bezier(0.1, 0.8, 0.1, 1);
+}
+
+.grade-aplus {
+    color: #55ff55 !important;
+}
+
+/* Bright Green */
+.grade-a {
+    color: #55ff55 !important;
+}
+
+.grade-b {
+    color: #d9e835 !important;
+}
+
+/* Cyan */
+.grade-c {
+    color: #ffaa00 !important;
+}
+
+/* Orange/Gold */
+.grade-d {
+    color: #ff5555 !important;
+}
+
+/* Light Red */
+.grade-f {
+    color: #aa0000 !important;
+}
+
+.bg-aplus {
+    background-color: #55ff55;
+}
+
+.bg-a {
+    background-color: #33cc33;
+}
+
+.bg-b {
+    background-color: #d9e835;
+}
+
+.bg-c {
+    background-color: #ffaa00;
+}
+
+.bg-d {
+    background-color: #ff5555;
+}
+
+.bg-f {
+    background-color: #aa0000;
+}
+
+.grade-aplus::after,
+.label-aplus::after {
+    content: "A+";
+}
+
+.grade-a::after {
+    content: "A";
+}
+
+.grade-b::after {
+    content: "B";
+}
+
+.grade-c::after {
+    content: "C";
+}
+
+.grade-d::after {
+    content: "D";
+}
+
+.grade-f::after {
+    content: "F";
+}
+
+.grade-aplus::after {
+    content: "A+";
+}
+
+.grade-a::after {
+    content: "A";
+}
+
+.grade-b::after {
+    content: "B";
+}
+
+.grade-c::after {
+    content: "C";
+}
+
+.grade-d::after {
+    content: "D";
+}
+
+.grade-f::after {
+    content: "F";
+}
+
+/* --- 2. Base Progress Fill Configuration --- */
+.progress-fill {
+    width: 0%;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.25s;
+    animation-fill-mode: forwards;
+}
+
+.subjects-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Base state for all cards */
+.subject-box {
+    flex: 1 1 calc(33.333% - 20px);
+    /* Defaults to roughly 3 columns */
+    min-width: 280px;
+    background-color: #3b5030;
+    border: 2px solid #2d3b24;
+    border-radius: 0px;
+    padding: 16px;
+    color: #ffffff;
+    overflow: hidden;
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: inset -2px -2px 0px #1e2818, inset 2px 2px 0px #547245;
+    /* Retro 3D inset shadow */
+    list-style: none;
+    /* Removes native summary arrow */
+    transition:
+        grid-column 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+        height 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+        background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+        opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+        transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.subject-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    /* Minecraft style font fallback */
+    font-weight: bold;
+    font-size: 14px;
+    color: #ffffff !important;
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 0px #000000;
+    /* Distinct Minecraft text drop shadow */
+}
+
+/* Hide default browser marker details */
+.subject-box summary::-webkit-details-marker {
+    display: none;
+}
+
+.subject-header {
+    cursor: pointer;
+    outline: none;
+    display: block;
+}
+
+/* CRITICAL STEP: When ANY box opens, it scales up, and tells un-opened containers to stay small */
+.subject-box[open] {
+    flex: 3 1 100%;
+    /* Force expanded box to stretch wider/take space */
+    border-color: #555555;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1);
+    grid-column: 1 / -1;
+    background-color: #252525;
+    height: auto;
+}
+
+/* Inside Expanded View Layout */
+.expanded-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px));
+    gap: 30px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #333333;
+    animation: fadeIn 0.3s ease-out forwards;
+    color: #bbbbbb;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.subjects-container:has(details[open]) details:not([open]) {
+    opacity: 0.3 !important;
+    transform: scale(0.96) !important;
+}
+
+@starting-style {
+    .subject-box[open] .expanded-content {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+}
+
+/* Session Box Designs */
+.session-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.session-item input[type="checkbox"]:checked::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: #000000;
+    /* Sharp blocky mark inside */
+}
+
+.session-item {
+    appearance: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px;
+    background: #2e4c1e;
+    border: 3px solid #cbd5e1;
+    border-radius: 1px;
+    border-color: #1c3113;
+    cursor: pointer;
+}
+
+/* Weight Breakdown Panel Rules */
+.weight-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.weight-list li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 3. Attribute Selectors & Keyframe Mapping --- */
+.progress-fill[data-progress="92%"] {
+    animation-name: fillTo92;
+}
+
+.progress-fill[data-progress="85%"] {
+    animation-name: fillTo85;
+}
+
+.progress-fill[data-progress="75%"] {
+    animation-name: fillTo75;
+}
+
+.progress-fill[data-progress="65%"] {
+    animation-name: fillTo65;
+}
+
+.progress-fill[data-progress="55%"] {
+    animation-name: fillTo55;
+}
+
+.progress-fill[data-progress="40%"] {
+    animation-name: fillTo40;
+}
+
+/* --- 4. Individual Keyframe Definitions --- */
+@keyframes fillTo92 {
+    to {
+        width: 92%;
+    }
+}
+
+@keyframes fillTo85 {
+    to {
+        width: 85%;
+    }
+}
+
+@keyframes fillTo75 {
+    to {
+        width: 75%;
+    }
+}
+
+@keyframes fillTo65 {
+    to {
+        width: 65%;
+    }
+}
+
+@keyframes fillTo55 {
+    to {
+        width: 55%;
+    }
+}
+
+@keyframes fillTo40 {
+    to {
+        width: 40%;
+    }
+}
+
+/* Apply dynamic inline variables */
+.grade-box {
+    color: var(--theme-color, #ffffff);
+}
+
+.progress-fill {
+    width: var(--progress-width, 0%);
+    background-color: var(--theme-color, #55ff55);
+}
+
+.semester-section {
+    margin-bottom: 30px;
+}
+
+.semester-title {
+    color: #55ff55;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+.grade-box {
+    color: var(--theme-color, #ffffff);
+}
+
+.progress-fill {
+    width: var(--progress-width, 0%);
+    background-color: var(--theme-color, #55ff55);
+}
+
+/* Semester Outer Box */
+.semester-box {
+    background-color: #1a1a1a;
+    border: 2px solid #333333;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    padding: 15px 20px;
+}
+
+.semester-box[open]>summary .sem-arrow {
+    transform: rotate(90deg);
+}
+
+.semester-header {
+    cursor: pointer;
+    list-style: none;
+}
+
+.semester-header::-webkit-details-marker {
+    display: none;
+}
+
+.semester-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.semester-title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sem-arrow {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.2s;
+    color: #ffffff;
+}
+
+.sem-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.sem-subtitle {
+    font-size: 0.8rem;
+    color: #888888;
+    margin-top: 2px;
+    margin-left: 18px;
+}
+
+.sem-meta-right {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+}
+
+/* Stats Row */
+.sem-stats-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding-top: 10px;
+}
+
+.sem-progress-block {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 200px;
+}
+
+.sem-label {
+    font-size: 0.75rem;
+    color: #aaaaaa;
+}
+
+.sem-mini-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #333333;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.sem-mini-fill {
+    height: 100%;
+    width: var(--progress-width, 0%);
+    background-color: var(--theme-color, #55ff55);
+}
+
+.sem-stat-num {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sem-num {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.green-text {
+    color: #55ff55;
+}
+
+.cyan-text {
+    color: #55ffff;
+}
+
+.white-text {
+    color: #ffffff;
+}
+
+.red-text {
+    color: #ff5555;
+}
+
+/* Grid for 6 courses inside semester */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #2a2a2a;
+}
+
+/* Clickable Card Styling */
+.clickable-card {
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.clickable-card:hover {
+    transform: translateY(-2px);
+    border-color: #55ff55;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay:target {
+    display: flex;
+}
+
+/* Modal Box */
+.modal-box {
+    background-color: #1a1a1a;
+    border: 3px solid #55ff55;
+    border-radius: 6px;
+    width: 420px;
+    max-width: 90%;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(85, 255, 85, 0.3);
+    color: #ffffff;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333333;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #55ff55;
+}
+
+.close-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #aaaaaa;
+}
+
+.close-btn:hover {
+    color: #ffffff;
+}
+
+/* Achievement Items */
+.achievement-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.achievement-item {
+    background-color: #262626;
+    border: 1px solid #444444;
+    padding: 10px 14px;
+    border-radius: 4px;
+}
+
+.achieve-title {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.achieve-details {
+    font-size: 0.85rem;
+    color: #aaaaaa;
+}
+
+.empty-msg {
+    color: #aaaaaa;
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.grade-box {
+    border: 1px solid var(--grade-color, #ffffff);
+    color: var(--grade-color, #ffffff);
+    padding: 1px 4px;
+}
+
+.gpa-val {
+    color: var(--gpa-color, #ffffff);
+    font-weight: bold;
+}
+
+.details-section {
+    background: #252525;
+    border: 2px solid #3a3a3a;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.details-section h3 {
+    color: #7CCD56;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.details-section p {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}

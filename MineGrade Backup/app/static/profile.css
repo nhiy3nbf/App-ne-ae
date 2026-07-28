@@ -1,0 +1,153 @@
+:root {
+    --bg-dark: #121212;
+    --bg-sidebar: #2e4c1e;
+    --bg-card: #3b5e2b;
+    --bg-content: #1e1e1e;
+    --text-green: #4eff4e;
+    --text-white: #e0e0e0;
+    --border-gray: #444444;
+    --mc-shadow: #1c3113;
+}
+
+/* =========================
+    Header (Căn ngang Tiêu đề & Nút)
+========================= */
+
+.profile-header {
+    display: flex;
+    justify-content: space-between; /* Đẩy Title sang trái, Customize/Save sang phải */
+    align-items: center;            /* Căn giữa chiều dọc */
+    margin-bottom: 30px;
+}
+
+/* =========================
+    Page Title
+========================= */
+
+.page-title {
+    color: #7CCD56;
+    font-size: 56px;
+    margin: 0;                       /* Reset margin để không lệch hàng */
+    text-shadow: 2px 2px #000;
+    font-weight: normal;
+    font-family: 'Minecraft', Arial, sans-serif;
+}
+
+/* =========================
+    Button Customize / Save (Minecraft Style)
+========================= */
+
+.customize-btn {
+    background: #32cd32;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+
+    font-family: 'Minecraft', Arial, sans-serif;
+    font-size: 16px;
+    text-shadow: 2px 2px #000;
+
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 0;
+
+    /* Viền 3D Pixel nổi */
+    border: 3px solid #66ff66;
+    border-bottom-color: #1b7a1b;
+    border-right-color: #1b7a1b;
+    box-shadow: inset -3px -3px 0px #145914;
+}
+
+.customize-btn:hover {
+    background: #28b428;
+    border-color: #55e655;
+    border-bottom-color: #145914;
+    border-right-color: #145914;
+}
+
+.customize-btn:active {
+    border-color: #145914;
+    border-bottom-color: #55e655;
+    border-right-color: #55e655;
+    box-shadow: inset 3px 3px 0px #0e3d0e;
+    transform: translateY(2px);
+}
+
+/* Nút Save đổi sang màu vàng cam nổi bật */
+.customize-btn.save-btn {
+    background: #ffaa00;
+    border-color: #ffcc66;
+    border-bottom-color: #996600;
+    border-right-color: #996600;
+    box-shadow: inset -3px -3px 0px #664400;
+}
+
+.customize-btn.save-btn:hover {
+    background: #e69900;
+}
+
+/* =========================
+    Cards (Minecraft 3D Frame)
+========================= */
+
+.card.profile-group {
+    background-color: #171717;
+
+    /* Viền 3D pixel xám tối giống cái bảng GPA trong Prediction */
+    border: 3px solid #3c3c3c;
+    border-bottom-color: #101010;
+    border-right-color: #101010;
+    box-shadow: inset -3px -3px 0px #080808;
+
+    padding: 20px 24px;
+    margin-bottom: 20px;
+
+    /* Layout 3 cột ngang */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.profile-item {
+    flex: 1;
+}
+
+.profile-item h3 {
+    color: #55ff55;
+    font-size: 16px;
+    font-family: 'Minecraft', Arial, sans-serif;
+    text-shadow: 1px 1px #000;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.profile-item p {
+    color: var(--text-white);
+    font-size: 15px;
+    font-family: 'Minecraft', Arial, sans-serif;
+    margin: 0;
+    text-shadow: 1px 1px #000;
+}
+
+/* =========================
+    Ô Input Nhập Liệu Chế Độ Sửa
+========================= */
+
+.mc-input {
+    width: 90%;
+    background-color: #0d0d0d;
+    color: #ffffff;
+    font-family: 'Minecraft', Arial, sans-serif;
+    font-size: 14px;
+    padding: 6px 10px;
+    border: 2px solid #3c3c3c;
+    border-top-color: #000000;
+    border-left-color: #000000;
+    outline: none;
+    box-shadow: inset 2px 2px 0px #000;
+}
+
+.mc-input:focus {
+    border-color: #55ff55;
+}
